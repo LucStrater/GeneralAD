@@ -1,0 +1,147 @@
+### constants                                        
+batch_size=16   
+test_batch_size=16                                
+lr=0.0005                                           
+lr_decay_factor=0.2
+seed=0                                              
+hf_path='vit_large_patch14_dinov2.lvd142m'          # 'vit_base_patch16_224.orig_in21k', 'vit_base_patch14_dinov2.lvd142m', 'vit_base_patch14_reg4_dinov2.lvd142m', 'vit_base_patch16_224.orig_in21k_ibot', 'eva02_base_patch14_224.mim_in22k'
+image_size=518                                      
+layers_to_extract_from='24'                         # ViT-S / ViT-B: (1 till 12) default '12', ViT-L: (1 till 24) default '24'
+hidden_dim=2048                                     
+noise_std=0.25                                  
+num_fake_patches=-1
+dsc_layers=1
+dsc_heads=4
+dsc_dropout=0.1
+smoothing_sigma=16
+smoothing_radius=18
+shots=-1                                            # We ran seeds 0, 10, 20, 30, 40 for few-shot
+
+### implementation
+code_dir=./
+data_dir='data/'
+# checkpoint_dir='./lightning_logs/mesxeigg/checkpoints/epoch=34-step=1750.ckpt'    
+log_every_n_steps=4  
+val_monitor="image_auroc"  
+log_pixel_metrics=0                             
+run_type="general_ad"                                
+wandb_entity="private"
+wandb_api_key="private"
+wandb_name="GeneralAD"   
+
+
+### Industrial dataset
+
+# dataset='mvtec-loco-ad'
+# fake_feature_type='shuffle_and_random'  
+# top_k=10
+# epochs=160
+# log_pixel_metrics=0
+# classes=('screw_bag' 'pushpins' 'juice_bottle' 'breakfast_box' 'splicing_connectors')
+
+dataset='mvtec-ad'
+fake_feature_type='random'    
+top_k=10
+epochs=160
+log_pixel_metrics=0
+classes=('tile' 'bottle' 'cable' 'capsule' 'carpet' 'grid' 'hazelnut' 'leather' 'metal_nut' 'pill' 'screw' 'toothbrush' 'transistor' 'wood' 'zipper')
+
+# dataset='mpdd'
+# fake_feature_type='random'   
+# top_k=10
+# epochs=160 
+# log_pixel_metrics=0
+# classes=('bracket_black' 'bracket_brown' 'bracket_white' 'connector' 'metal_plate' 'tubes')
+
+# dataset='visa'
+# fake_feature_type='random'   
+# top_k=10 
+# epochs=160 
+# log_pixel_metrics=0 
+# classes=('candle' 'capsules' 'cashew' 'chewinggum' 'fryum' 'macaroni1' 'macaroni2' 'pcb1' 'pcb2' 'pcb3' 'pcb4' 'pipe_fryum')
+
+
+### Semantic dataset
+
+# dataset='cifar10'
+# fake_feature_type='base' 
+# top_k=-1  
+# epochs=20
+# classes=(0 1 2 3 4 5 6 7 8 9) 
+
+# dataset='cifar100'
+# fake_feature_type='base'
+# top_k=-1   
+# epochs=20
+# classes=(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19)  
+
+# dataset='fmnist'
+# fake_feature_type='base' 
+# top_k=-1  
+# epochs=20
+# classes=(0 1 2 3 4 5 6 7 8 9)
+
+# dataset='view'
+# fake_feature_type='base'   
+# top_k=-1 
+# epochs=20
+# classes=('buildings' 'forest' 'glacier' 'mountain' 'sea' 'street')
+
+
+### Near-Novelty dataset
+
+# dataset='fgvc-aircraft'
+# fake_feature_type='base' 
+# top_k=-1
+# epochs=160
+# classes=(91 96 59 19 37 45 90 68 74 89)
+
+# dataset='stanford-cars'
+# fake_feature_type='base'  
+# top_k=-1 
+# epochs=160
+# classes=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20)
+
+
+### Vizualization (easy) datasets
+
+# dataset='catsvdogs'
+# fake_feature_type='base' 
+# top_k=-1  
+# epochs=20
+# classes=(Dog Cat)
+
+for class in "${classes[@]}"; do
+    echo "Running experiment on $dataset with class $class and learning rate $lr"
+    python $code_dir/main.py \
+        --normal_class $class \
+        --epochs $epochs \
+        --batch_size $batch_size \
+        --test_batch_size $test_batch_size \
+        --lr $lr \
+        --lr_decay_factor $lr_decay_factor \
+        --seed $seed \
+        --hf_path $hf_path \
+        --image_size $image_size \
+        --layers_to_extract_from $layers_to_extract_from \
+        --hidden_dim $hidden_dim \
+        --noise_std $noise_std \
+        --log_every_n_steps $log_every_n_steps \
+        --run_type $run_type \
+        --dataset $dataset \
+        --wandb_entity $wandb_entity \
+        --wandb_api_key $wandb_api_key \
+        --wandb_name $wandb_name \
+        --data_dir $data_dir \
+        --num_fake_patches $num_fake_patches \
+        --dsc_layers $dsc_layers \
+        --dsc_heads $dsc_heads \
+        --dsc_dropout $dsc_dropout \
+        --fake_feature_type $fake_feature_type \
+        --top_k $top_k \
+        --smoothing_sigma $smoothing_sigma \
+        --smoothing_radius $smoothing_radius \
+        --shots $shots \
+        --val_monitor $val_monitor \
+        --log_pixel_metrics $log_pixel_metrics
+done

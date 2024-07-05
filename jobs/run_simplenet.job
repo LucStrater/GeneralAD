@@ -1,0 +1,101 @@
+# constants from simplenet paper
+epochs=160                                      # Default is 160
+batch_size=8                                    # Default is 8
+lr=0.0002                                       # Default is 0.0002
+lr_adaptor=0.0001                               # Default is 0.0001
+seed=0                                          # Default is 0
+hf_path='wide_resnet50_2.tv_in1k'               # Default: 'wide_resnet50_2.tv_in1k', other: 'vit_base_patch14_dinov2.lvd142m' --> add --no_avg_pooling command
+image_size=224                                  # Default is 224, DINO: 518, ViT: 224
+layers_to_extract_from='2,3'                    # Default is '2,3', ResNet: (1,2,3,4), DINO/ViT: (1 till 12)
+hidden_dim=1024                                 # Default is 1024
+noise_std=0.015                                 # Default is 0.015
+dsc_layers=2                                    # Default is 2
+smoothing_sigma=4                               # Default is 4
+smoothing_radius=9                              # Default is 9
+  
+# implementation
+code_dir=./
+log_every_n_steps=4                             
+run_type="simplenet"                            
+wandb_entity="private"
+wandb_api_key="private"
+wandb_name="simplenet"
+val_monitor="image_auroc"
+data_dir='data/'
+shots=-1
+log_pixel_metrics=0  
+
+### Industrial dataset
+
+# dataset='mvtec-loco-ad'
+# classes=('screw_bag' 'pushpins' 'juice_bottle' 'breakfast_box' 'splicing_connectors')
+
+dataset='mvtec-ad'
+classes=('tile' 'bottle' 'cable' 'capsule' 'carpet' 'grid' 'hazelnut' 'leather' 'metal_nut' 'pill' 'screw' 'toothbrush' 'transistor' 'wood' 'zipper')
+
+# dataset='mpdd'
+# classes=('bracket_black' 'bracket_brown' 'bracket_white' 'connector' 'metal_plate' 'tubes')
+
+# dataset='visa'
+# classes=('candle' 'capsules' 'cashew' 'chewinggum' 'fryum' 'macaroni1' 'macaroni2' 'pcb1' 'pcb2' 'pcb3' 'pcb4' 'pipe_fryum')
+
+
+### Semantic dataset
+
+# dataset='cifar10'
+# classes=(0 1 2 3 4 5 6 7 8 9) 
+
+# dataset='cifar100'
+# classes=(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19)  
+
+# dataset='fmnist'
+# classes=(0 1 2 3 4 5 6 7 8 9)
+
+# dataset='view'
+# classes=('buildings' 'forest' 'glacier' 'mountain' 'sea' 'street')
+
+
+### Near-Novelty dataset
+
+# dataset='fgvc-aircraft' 
+# classes=(91 96 59 19 37 45 90 68 74 89)
+
+# dataset='stanford-cars'
+# classes=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20)
+
+
+### Vizualization (easy) datasets
+
+# dataset='catsvdogs'
+# classes=(Dog Cat)
+
+
+# for running normall simplenet with WideResNet50 dont forget to remove --no_avg_pooling 
+for class in "${classes[@]}"; do
+    echo "Running experiment on $dataset with class $class and learning rate $lr"
+    python $code_dir/main.py \
+        --normal_class $class \
+        --epochs $epochs \
+        --batch_size $batch_size \
+        --lr $lr \
+        --lr_adaptor $lr_adaptor \
+        --seed $seed \
+        --hf_path $hf_path \
+        --image_size $image_size \
+        --layers_to_extract_from $layers_to_extract_from \
+        --hidden_dim $hidden_dim \
+        --noise_std $noise_std \
+        --dsc_layers $dsc_layers \
+        --log_every_n_steps $log_every_n_steps \
+        --run_type $run_type \
+        --dataset $dataset \
+        --wandb_entity $wandb_entity \
+        --wandb_api_key $wandb_api_key \
+        --wandb_name $wandb_name \
+        --data_dir $data_dir \
+        --smoothing_sigma $smoothing_sigma \
+        --smoothing_radius $smoothing_radius \
+        --shots $shots \
+        --val_monitor $val_monitor \
+        --log_pixel_metrics $log_pixel_metrics
+done

@@ -1,0 +1,110 @@
+# constants     
+log_every_n_steps=1  
+run_type="kdad"        
+model_type="ViT"       
+max_epoch=10 
+lr=0.001       
+batch_size=16 
+  
+# these things are all related (image_size / patch_size)**2 == num_patches must be true
+hf_path='vit_base_patch14_dinov2.lvd142m'   # 'vit_base_patch14_dinov2.lvd142m' 'vit_base_patch14_reg4_dinov2.lvd142m'  'vit_base_patch16_224.orig_in21k'
+patch_size=14                              # dino: 14, vit: 16
+num_patches=1369                            # dino: 1369, vit: 256
+image_size=518                              # dino: 518, vit: 224
+
+# additional constants
+seed=0
+num_workers=2
+embed_dim=768   
+hidden_dim=512  
+num_heads=8
+num_layers=4
+num_channels=3
+dropout=0.2
+milestones="10,20"
+gamma=0.5
+wandb_entity="private"
+wandb_api_key="private"
+wandb_name="kdad"
+val_monitor="image_auroc"
+code_dir=./
+data_dir='data/'
+shots=-1
+
+
+### Industrial dataset
+
+# dataset='mvtec-loco-ad'
+# classes=('screw_bag' 'pushpins' 'juice_bottle' 'breakfast_box' 'splicing_connectors')
+
+dataset='mvtec-ad'
+classes=('tile' 'bottle' 'cable' 'capsule' 'carpet' 'grid' 'hazelnut' 'leather' 'metal_nut' 'pill' 'screw' 'toothbrush' 'transistor' 'wood' 'zipper')
+
+# dataset='mpdd'
+# classes=('bracket_black' 'bracket_brown' 'bracket_white' 'connector' 'metal_plate' 'tubes')
+
+# dataset='visa'
+# classes=('candle' 'capsules' 'cashew' 'chewinggum' 'fryum' 'macaroni1' 'macaroni2' 'pcb1' 'pcb2' 'pcb3' 'pcb4' 'pipe_fryum')
+
+
+### Semantic dataset
+
+# dataset='cifar10'
+# classes=(0 1 2 3 4 5 6 7 8 9) 
+
+# dataset='cifar100'
+# classes=(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19)  
+
+# dataset='fmnist'
+# classes=(0 1 2 3 4 5 6 7 8 9)
+
+# dataset='view'
+# classes=('buildings' 'forest' 'glacier' 'mountain' 'sea' 'street')
+
+
+### Near-Novelty dataset
+
+# dataset='fgvc-aircraft' 
+# classes=(91 96 59 19 37 45 90 68 74 89)
+
+# dataset='stanford-cars'
+# classes=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20)
+
+
+### Vizualization (easy) datasets
+
+# dataset='catsvdogs'
+# classes=(Dog Cat)
+
+for class in "${classes[@]}"; do
+    echo "Running experiment on $dataset with class $class and learning rate $lr"
+    python $code_dir/main.py \
+        --normal_class $class \
+        --seed $seed \
+        --dataset_name $dataset \
+        --epochs $max_epoch \
+        --log_every_n_steps $log_every_n_steps \
+        --batch_size $batch_size \
+        --num_workers $num_workers \
+        --embed_dim $embed_dim \
+        --hidden_dim $hidden_dim \
+        --num_heads $num_heads \
+        --num_layers $num_layers \
+        --patch_size $patch_size \
+        --num_channels $num_channels \
+        --num_patches $num_patches \
+        --dropout $dropout \
+        --lr $lr \
+        --hf_path $hf_path \
+        --milestones $milestones \
+        --gamma $gamma \
+        --wandb_entity $wandb_entity \
+        --wandb_api_key $wandb_api_key \
+        --wandb_name $wandb_name \
+        --data_dir $data_dir \
+        --run_type $run_type \
+        --model_type $model_type \
+        --image_size $image_size \
+        --shots $shots \
+        --val_monitor $val_monitor 
+done

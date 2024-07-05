@@ -1,0 +1,23 @@
+# code dir
+code_dir=./
+
+# what to show
+dataset='stanford-cars'
+class=4
+run_type="test_data"
+image_size=518
+data_dir='data/'
+batch_size=16
+test_batch_size=64
+num_workers=2
+
+
+python $code_dir/main.py \
+    --normal_class $class \
+    --dataset_name $dataset \
+    --data_dir $data_dir \
+    --run_type $run_type \
+    --image_size $image_size \
+    --batch_size $batch_size \
+    --test_batch_size $test_batch_size \
+    --num_workers $num_workers
