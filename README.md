@@ -58,7 +58,7 @@ We achieve the following qualitative results:
 
 If you find this repository useful, please consider giving a star ⭐ and citation 📣:
 ``` 
-@article{salehi2023time,
+@article{strater2024generalad,
    title        = {GeneralAD: Anomaly Detection Across Domains by Attending to Distorted Features},
    author       = {Sträter, Luc P.J. and Salehi, Mohammadreza and Gavves, Efstratios and Snoek, Cees G. M. and Asano, Yuki M.},
    year         = {2024},
