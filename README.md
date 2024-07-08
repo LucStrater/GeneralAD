@@ -33,7 +33,7 @@ conda env create -f environment.yml
 2 - Activate the environment:
 
 ```
-conda activate Timetuning
+conda activate ls_gpu
 ```
 
 ## Results
