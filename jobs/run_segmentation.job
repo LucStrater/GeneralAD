@@ -1,5 +1,6 @@
 ### constants                                        
-batch_size=16                                      
+batch_size=16  
+test_batch_size=16                                    
 seed=0                                              
 image_size=518                                      
 smoothing_sigma=16
@@ -8,18 +9,18 @@ smoothing_radius=18
 ### implementation
 code_dir=./
 data_dir='data/'
-checkpoint_dir='./lightning_logs/zn30bief/checkpoints/epoch=128-step=2580.ckpt'    
+checkpoint_dir='./lightning_logs/u2cc0qbz/checkpoints/epoch=5-step=90.ckpt'    
 log_every_n_steps=4                                 
 run_type='viz_segmentation'  
 
 
 ### Industrial dataset
 
-dataset='mvtec-loco-ad'
-class='breakfast_box'
+# dataset='mvtec-loco-ad'
+# class='breakfast_box'
 
-# dataset='mvtec-ad'
-# class='screw'
+dataset='mvtec-ad'
+class='screw'
 
 # dataset='visa'
 # class='chewinggum'
@@ -28,7 +29,7 @@ class='breakfast_box'
 ### Semantic dataset
 
 # dataset='cifar10'
-# class=1 
+# class=0
 
 # dataset='catsvdogs'
 # class='Cat'
@@ -41,6 +42,7 @@ class='breakfast_box'
 python $code_dir/main.py \
     --normal_class $class \
     --batch_size $batch_size \
+    --test_batch_size $test_batch_size \
     --seed $seed \
     --image_size $image_size \
     --run_type $run_type \

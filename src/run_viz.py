@@ -63,7 +63,7 @@ def viz_segmentation(args):
                                                 align_corners=False
                                                 ).squeeze(0).squeeze(0)
 
-            segmentations = -gaussian_filter(scores_interpolated.cpu().detach().numpy(), sigma=args.smoothing_sigma, radius=args.smoothing_radius)  
+            segmentations = gaussian_filter(scores_interpolated.cpu().detach().numpy(), sigma=args.smoothing_sigma, radius=args.smoothing_radius)  
 
             seg_min = segmentations.min()
             seg_max = segmentations.max()
@@ -84,7 +84,7 @@ def viz_segmentation(args):
             ax.imshow(seg_img_rgba, cmap='hot', alpha=0.5)
             ax.axis('off')
             
-            plt.savefig(os.path.join('slurm', 'images', f'seg{i}_{b}'), bbox_inches='tight', pad_inches=0)
+            plt.savefig(os.path.join('images', f'seg{i}_{b}'), bbox_inches='tight', pad_inches=0)
             plt.close()
 
             # Plotting
@@ -92,7 +92,7 @@ def viz_segmentation(args):
             ax.imshow(img_np)  
             ax.axis('off')
             
-            plt.savefig(os.path.join('slurm', 'images', f'img{i}_{b}'), bbox_inches='tight', pad_inches=0)
+            plt.savefig(os.path.join('images', f'img{i}_{b}'), bbox_inches='tight', pad_inches=0)
             plt.close()
 
         i = i + 1
