@@ -38,15 +38,15 @@ conda activate ls_gpu
 
 ## Results
 
-We achieve the following image-level AUROC results:
+We achieve the following image-level AUROC results. To reproduce the results see run_general_ad.job in `GeneralAD\jobs`. To run the job file add the arguments `wandb_entity` and `wandb_api_key` and uncomment the desired dataset.
 
-![Image-level AUROC results](images/results.png)
+![Image-level AUROC results](images/image_results.png)
 
-We achieve the following pixel-level AUROC results:
+We achieve the following pixel-level AUROC results. To reproduce the results see run_general_ad.job in `GeneralAD\jobs`. To run the job file add the arguments `wandb_entity` and `wandb_api_key`, change the arguments `val_monitor="pixel_auroc"` and `log_pixel_metrics=1` and uncomment the desired dataset.
 
 ![Pixel-level AUROC results](images/pixel_results.png)
 
-We achieve the following qualitative results:
+We achieve the following qualitative results. To reproduce the results first run GeneralAD, this will save the checkpoints in `lightning_logs` folder. Then change the `checkpoint_dir` argument in run_segmentation.job in `GeneralAD\jobs`.
 
 ![Qualitative localization results.](images/localization.png)
 
