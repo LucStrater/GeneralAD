@@ -1,6 +1,6 @@
 # GeneralAD: Anomaly Detection Across Domains by Attending to Distorted Features
 
-Official PyTorch implementation for "GeneralAD: Anomaly Detection Across Domains by Attending to Distorted Features" ECCV24. For details, see [arXiv](-).
+Official PyTorch implementation for "GeneralAD: Anomaly Detection Across Domains by Attending to Distorted Features" ECCV24. For details, see [arXiv](https://arxiv.org/abs/2407.12427).
 
 [Luc P.J. Sträter*](https://scholar.google.com/citations?user=tjKPuEsAAAAJ&hl=en), [Mohammadreza Salehi*](https://scholar.google.com/citations?user=kpT3gcsAAAAJ&hl=en), [Efstratios Gavves](https://www.egavves.com/), [Cees G. M. Snoek](https://www.ceessnoek.info/), [Yuki M. Asano](https://yukimasano.github.io/)  |   University of Amsterdam
 
