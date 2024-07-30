@@ -59,9 +59,9 @@ We achieve the following qualitative results. To reproduce the results first run
 If you find this repository useful, please consider giving a star ⭐ and citation 📣:
 ``` 
 @article{strater2024generalad,
-   title        = {GeneralAD: Anomaly Detection Across Domains by Attending to Distorted Features},
-   author       = {Sträter, Luc P.J. and Salehi, Mohammadreza and Gavves, Efstratios and Snoek, Cees G. M. and Asano, Yuki M.},
-   year         = {2024},
-   journal    = {ECCV},
+  title={GeneralAD: Anomaly Detection Across Domains by Attending to Distorted Features},
+  author={Str{\"a}ter, Luc PJ and Salehi, Mohammadreza and Gavves, Efstratios and Snoek, Cees GM and Asano, Yuki M},
+  journal={arXiv preprint arXiv:2407.12427},
+  year={2024}
 }
 ```
