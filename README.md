@@ -52,6 +52,16 @@ We achieve the following qualitative results. To reproduce the results first run
 
 ![Qualitative localization comparison.](images/comparison.jpg)
 
+
+# Baselines
+
+In this repository, we have also implemented the following baseline methods for better comparison:
+
+1. **[KDAD](https://github.com/rohban-lab/Knowledge_Distillation_AD)**: Knowledge Distillation-based Anomaly Detection, a method leveraging distillation techniques to identify anomalies in data. 
+2. **[SimpleNet](https://github.com/DonaldRR/SimpleNet)**: A lightweight and effective approach tailored for anomaly detection.
+
+Both methods can also be used with Vision Transformer (ViT) backbones.
+
 # Citation
 
 <a name="citation"> </a>
