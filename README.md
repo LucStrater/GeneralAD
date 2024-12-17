@@ -2,7 +2,7 @@
 
 Official PyTorch implementation for "GeneralAD: Anomaly Detection Across Domains by Attending to Distorted Features" ECCV24. For details, see [arXiv](https://arxiv.org/abs/2407.12427).
 
-[Luc P.J. Sträter*](https://scholar.google.com/citations?user=tjKPuEsAAAAJ&hl=en), [Mohammadreza Salehi*](https://scholar.google.com/citations?user=kpT3gcsAAAAJ&hl=en), [Efstratios Gavves](https://www.egavves.com/), [Cees G. M. Snoek](https://www.ceessnoek.info/), [Yuki M. Asano](https://yukimasano.github.io/)  |   University of Amsterdam
+[Luc P.J. Sträter*](https://lucstrater.github.io/), [Mohammadreza Salehi*](https://scholar.google.com/citations?user=kpT3gcsAAAAJ&hl=en), [Efstratios Gavves](https://www.egavves.com/), [Cees G. M. Snoek](https://www.ceessnoek.info/), [Yuki M. Asano](https://yukimasano.github.io/)  |   University of Amsterdam
 
 
 ## Method
@@ -68,10 +68,12 @@ Both methods can also be used with Vision Transformer (ViT) backbones.
 
 If you find this repository useful, please consider giving a star ⭐ and citation 📣:
 ``` 
-@article{strater2024generalad,
-  title={GeneralAD: Anomaly Detection Across Domains by Attending to Distorted Features},
+@inproceedings{strater2025generalad,
+  title={Generalad: Anomaly detection across domains by attending to distorted features},
   author={Str{\"a}ter, Luc PJ and Salehi, Mohammadreza and Gavves, Efstratios and Snoek, Cees GM and Asano, Yuki M},
-  journal={arXiv preprint arXiv:2407.12427},
-  year={2024}
+  booktitle={European Conference on Computer Vision},
+  pages={448--465},
+  year={2025},
+  organization={Springer}
 }
 ```
